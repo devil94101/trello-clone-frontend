@@ -1,0 +1,108 @@
+.headd{
+    background:#7d34eb;
+    height:20px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+}
+.create{
+    margin-top: 10px;
+    padding:10px;
+    background-color: #7d34eb;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+}
+.logout{
+    cursor: pointer;
+    color: white;
+}
+.noBoards{
+    margin-top:40px;
+}
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #512DA8;
+    font-size: 35px;
+    color: #fff;
+    text-align: center;
+    line-height: 150px;
+    margin: 20px 0;
+  }
+  .boards{
+     display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-left: 60px;
+  }
+  .tile{
+      display: flex;
+    margin-top: 50px;
+    margin-right: 80px;
+      width:220px;
+      height: 100px;
+      margin-left: 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color:#aab6ff;
+  }
+  .listTitle{
+      background-color: #fff;
+      border-bottom: 1px solid black;
+  }
+  .allList{
+    display: flex;
+    width: 80%;
+    justify-content: space-evenly;
+  }
+  .nameStyle{
+    display: flex;
+    background-color: #efefef;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+  }
+  .listName{
+      
+      margin-top: 40px;
+      margin-left: 30px;
+      width: 500px;
+      
+  }
+  .listCard{
+      margin-top: 10px;
+      display: block;
+      
+  }
+  .cardList{
+      background-color: blanchedalmond;
+      border:1px solid black;
+      margin-top: 30px;
+      display: flex;
+      min-height: 50px;
+      max-width: 270px;
+      justify-content: space-between;
+      
+  }
+  .cardList:hover{
+      background-color: rgb(196, 183, 164);
+  }
+  .moveTo{
+    border:1px solid black;
+    border-radius:10px;
+    padding:10px;
+    margin-top:15px;
+    cursor: pointer;
+  }
+  .moveTo:hover{
+      cursor: pointer;
+      background-color: aquamarine;
+  }

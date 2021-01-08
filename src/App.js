@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router ,Switch,Route} from 'react-router-dom'
+import Login from './Components/UserAuth/Login'
+import SignUp from './Components/UserAuth/SignUp'
+import Dashboard from './Components/List/DashBoard'
+import {Provider} from 'react-redux'
+import {store} from './Redux/store'
+import CreateBoard from './Components/Form/CreateBoard'
+import Lists from './Components/List/lists'
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+      <Router>
+        <Switch>
+        <Route path="/" exact component={Dashboard}/>
+        <Route path="/dashboard/:id" exact component={Lists}></Route>
+        <Route path="/createBoard" >
+          <CreateBoard/>
+        </Route>
+        <Route path="/signup" exact>
+          <SignUp />
+        </Route>
+        <Route path="/login" >
+            <Login />
+        </Route>
+        </Switch>
+      </Router>
+      </Provider>
     </div>
   );
 }
