@@ -58,22 +58,31 @@ export class lists extends Component {
                alert("Already have a list of same title")
             }
             else{
-                let x=this.props.list
-                x.list[num].push({
-                    title:this.state.title,
-                    description:"",
-                    users:[read_cookie('username')]
-                })
-                this.props.setList(x)
-                this.setState({
-                    listNumber:0,
-                    title:"",
+                axios.get(BaseUrl+'board/get/'+this.props.list.id).then(res=>{
+                    let x={
+                        list:res.data.list,
+                        name:res.data.name,
+                        users:res.data.users,
+                        id:res.data._id
+                    }                
+                    x.list[num].push({
+                        title:this.state.title,
+                        description:"",
+                        users:[read_cookie('username')]
                     })
-                axios.post(BaseUrl+"board/addList",x).then(res=>{
-                    console.log(res.data)
-                }).catch(err=>{
-                    console.log(err.message)
+                    this.props.setList(x)
+                    this.setState({
+                        listNumber:0,
+                        title:"",
+                    })
+                    
+                    axios.post(BaseUrl+"board/addList",x).then(res=>{
+                        console.log(res.data)
+                    }).catch(err=>{
+                        console.log(err.message)
+                    })
                 })
+                
             }
         }
     }

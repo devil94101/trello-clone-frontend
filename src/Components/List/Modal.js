@@ -51,34 +51,50 @@ export default class App extends Component {
     this.setState({titleInput:false})
   }
   save=()=>{
-    const data={
-      title:this.state.title,
-      description:this.state.description,
-      users:this.state.users
-    }
-    const x=this.props.list
-    x.list[this.props.num][this.props.index]=data
-    console.log(x)
-    axios.post(BaseUrl+"board/addList",x).then(res=>{
-      console.log(res.data)
-    }).catch(err=>{
-        console.log(err.message)
+    axios.get(BaseUrl+'board/get/'+this.props.list.id).then(res=>{
+      const data={
+        title:this.state.title,
+        description:this.state.description,
+        users:this.state.users
+      }
+      const x={
+        list:res.data.list,
+        name:res.data.name,
+        users:res.data.users,
+        id:res.data._id
+    } 
+      x.list[this.props.num][this.props.index]=data
+      console.log(x)
+      axios.post(BaseUrl+"board/addList",x).then(res=>{
+        console.log(res.data)
+      }).catch(err=>{
+          console.log(err.message)
+      })
+      this.props.setList(x)
+      this.props.handleClose()
     })
-    this.props.setList(x)
-    this.props.handleClose()
+    
   }
   delete=()=>{
     if(window.confirm("Are you sure you want to delete")){
-      const x=this.props.list
-    x.list[this.props.num].splice(this.props.index,1)
-    console.log(x)
-    axios.post(BaseUrl+"board/addList",x).then(res=>{
-      console.log(res.data)
-    }).catch(err=>{
-        console.log(err.message)
-    })
-    this.props.setList(x)
-    this.props.handleClose()
+      axios.get(BaseUrl+'board/get/'+this.props.list.id).then(res=>{
+        const x={
+          list:res.data.list,
+          name:res.data.name,
+          users:res.data.users,
+          id:res.data._id
+      } 
+        x.list[this.props.num].splice(this.props.index,1)
+        console.log(x)
+        axios.post(BaseUrl+"board/addList",x).then(res=>{
+          console.log(res.data)
+        }).catch(err=>{
+            console.log(err.message)
+        })
+        this.props.setList(x)
+        this.props.handleClose()
+      })
+      
   }
     
   }

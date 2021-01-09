@@ -23,13 +23,11 @@ export class DashBoard extends Component {
         this.props.setBoards([])
     }
     componentDidMount(){
-        if(this.props.boards.length===0&&this.state.load)
-        {const options={
+        const options={
             headers:{
                 'x-auth-token':read_cookie("token")
             }
         }
-        
         axios.post(BaseUrl+"user/get",{},options).then(res=>{
             if(res.data.err){
                 this.logout()
@@ -42,10 +40,7 @@ export class DashBoard extends Component {
             }
         }).catch(err=>{
             console.log(err.message)
-        })}
-        else{
-            this.setState({load:false})
-        }
+        })
     }
     render() {
         if(!this.state.login){
