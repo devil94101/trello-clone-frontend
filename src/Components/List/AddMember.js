@@ -52,11 +52,35 @@ export default class AddMember extends Component {
     }
     save=()=>{
         const x=this.props.list
+        let added=[],removed=[],map={}
+        for(let i=0;i<x.users.length;i++){
+           map[x.users[i]]=1
+        }
+        let map2={
+
+        }
+        for(let i=0;i<this.state.value.length;i++){
+            map2[this.state.value[i]]=1
+            if(map[this.state.value[i]]!==1){
+                added.push(this.state.value[i])
+            }
+        }
+        for(let i=0;i<x.users.length;i++){
+            
+            if(map2[x.users[i]]!==1){
+                removed.push(x.users[i])
+            }
+        }
         x.users=this.state.value
         axios.post(BaseUrl+"board/addList",x).then(res=>{
         console.log(res.data)
         }).catch(err=>{
             console.log(err.message)
+        })
+        axios.post(BaseUrl+"user/boardMembers",{
+            added,removed,
+            id:x.id,
+            name:x.name
         })
         this.props.setList(x)
         this.props.close()
@@ -77,7 +101,7 @@ export default class AddMember extends Component {
           }}></CloseIcon>
            <Autocomplete
                     multiple
-                    options={this.props.list.users}
+                    options={this.state.data}
                     style={{
                         marginTop:"20px"
                     }}
